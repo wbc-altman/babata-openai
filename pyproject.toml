@@ -1,0 +1,63 @@
+[tool.poetry]
+name = "babata-openai"
+version = "0.1.0"
+description = ""
+authors = ["wubocheng <bocheng.wu827@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+openai = "^1.14.3"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+orjson = "^3.10.0"
+pydantic = {version = "^1.10.7", extras = ["dotenv"]}
+sqlalchemy = "^2.0.29"
+logzero = "^1.7.0"
+bcrypt = "^4.1.2"
+python-jose = "^3.3.0"
+asyncpg = "^0.29.0"
+redis = "^5.0.3"
+aiocache = "^0.12.2"
+grpcio = "^1.62.1"
+grpcio-tools = "^1.62.1"
+async-timeout = "^4.0.3"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.4"
+black = "^24.3.0"
+pytest = "^8.1.1"
+pytest-asyncio = "^0.23.6"
+mypy-protobuf = "^3.6.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+exclude = [".ruff_cache", "build", "dist"]
+target-version = "py312"
+line-length = 88
+
+
+[tool.ruff.lint]
+select = [
+    # Pyflakes
+    "F",
+    # Pycodestyle
+    "E",
+    "W",
+    # isort
+    "I"
+]
+ignore = ["E711", "E712", "F541"]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.black]
+target-version = [ "py312" ]
+line-length = 88
+preview=true
+enable-unstable-feature = ["string_processing"]

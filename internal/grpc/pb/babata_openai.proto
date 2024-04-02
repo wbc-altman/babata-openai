@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package babata_openai;
+
+
+message Error {
+  // The code of this error.
+  uint32 code = 2;
+  // The description of this error.
+  string description = 3;
+}
+
+message Request {
+}
+
+message Response {
+    Error error = 1;
+}
+
+// PingRequest is the request of method Ping().
+message PingRequest {}
+
+// PingResponse is the response of method Ping().
+message PingResponse {
+  Error error = 1;
+  // Returns pong=true on success.
+  bool pong = 2;
+}
+
+message AskRequest {
+  string content = 1;
+}
+
+message AskResponse {
+  Error error = 1;
+  string content = 2;
+}
+
+service BabataOpenAI {
+  rpc Ping(PingRequest) returns (PingResponse) {};
+
+  rpc Ask(AskRequest) returns (AskResponse) {};
+}

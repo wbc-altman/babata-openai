@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package babata_openai;
+
+message ErrorCode {
+  enum ENUM {
+    // No error.
+    SUCCESS = 0;
+    VALIDATION_ERROR = 40000;
+    UNAUTHORIZED = 40001;
+    PERMISSION_ERROR = 40003;
+    SERVER_ERROR = 50000;
+  }
+}
+
+
+message Error {
+  // The code of this error.
+  ErrorCode.ENUM code = 2;
+  // The description of this error.
+  string description = 3;
+}
+
+// PingRequest is the request of method Ping().
+message PingRequest {}
+
+// PingResponse is the response of method Ping().
+message PingResponse {
+  Error error = 1;
+  // Returns pong=true on success.
+  bool pong = 2;
+}
+
+service BabataOpenAI {
+  rpc Ping(PingRequest) returns (PingResponse) {};
+}
