@@ -1,4 +1,4 @@
-FROM python:3.11-slim AS base
+FROM python:3.12-slim AS base
 
 RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
 RUN sed -i 's/security.debian.com/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources
@@ -25,8 +25,6 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry install --no-dev --no-interaction --no-ansi
 
 COPY . .
-RUN poetry build -f wheel
-RUN pip install --no-deps dist/*.whl
-RUN find /app/* -type d,f -delete
 
-ENTRYPOINT [""]
+ENTRYPOINT ["python"]
+CMD ["-m", "internal.grpc.main"]
